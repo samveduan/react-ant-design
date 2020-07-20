@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row, Col, Button, Modal } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
+import axios from 'axios'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
@@ -171,7 +172,7 @@ export default class Bs extends React.Component {
 
         $.fn.zTree.init($("#tree"), orgTreeSetting, znodes);
 
-        $("#bootstrap-table")
+        let $adminTable = $("#bootstrap-table")
             .bootstrapTable("destroy")
             .bootstrapTable({
                 url: "",
@@ -184,10 +185,10 @@ export default class Bs extends React.Component {
                 sidePagination: "client", //分页方式：client客户端分页，server服务端分页（*）
                 undefinedText: "--",
                 //singleSelect: true,                  // 单选checkbox，默认为复选
-                showRefresh: true, // 显示刷新按钮
-                showColumns: true, // 选择显示的列
+                showRefresh: false, // 显示刷新按钮
+                showColumns: false, // 选择显示的列
                 toolbar: "#item_info_toolbar", // 搜索框位置
-                search: true, // 搜索开启,
+                search: false, // 搜索开启,
                 strictSearch: true,
                 clickToSelect: true, // 点击选中行
                 pagination: true, //是否显示分页
@@ -214,39 +215,27 @@ export default class Bs extends React.Component {
                 },
                 columns: [
                     {
-                        checkbox: true
+                        checkbox: true,
+                        width: 20,
                     },
                     {
-                        field: "username",
-                        title: "用户名",
+                        field: "id",
+                        title: "ID",
                         valign: "middle",
-                        width: "16%",
                         sortable: true
                     },
                     {
-                        field: "fullname",
-                        title: "姓名",
-                        width: "16%"
+                        field: "title",
+                        title: "标题"
                     },
                     {
-                        field: "status",
-                        title: "密码认证",
-                        width: "16%"
+                        field: "content",
+                        title: "内容"
                     },
                     {
-                        field: "availableSpace",
-                        title: "智能卡认证",
-                        valign: "middle",
-                        width: "16%"
-                    },
-                    {
-                        field: "totalSpace",
-                        title: "个人空间配额",
-                        width: "16%"
-                    },
-                    {
-                        field: "storageServer",
-                        title: "私密空间配额"
+                        field: "create_time",
+                        title: "添加时间",
+                        valign: "middle"
                     }
                 ],
                 onLoadSuccess: function () {
@@ -258,12 +247,26 @@ export default class Bs extends React.Component {
                 onDblClickRow: function (row, $element) {
                     var id = row.ID;
                     //EditViewById(id, 'view');
-                },
-                rowStyle: function (row, index) {
-                    //设置行的特殊样式
-                    //这里有5个取值颜色['active', 'success', 'info', 'warning', 'danger'];
-
                 }
             });
+
+        axios.get("/blog/all/?pageSize=5&pageNumber=1&sortName=id&sortOrder=desc&_=1595252243084")
+          .then(function (response) {
+            let blogArr = [];
+            for(let i = 0; i<response.data.rows.length; i++){
+                blogArr.push({
+                    id: response.data.rows[i].id,
+                    title: response.data.rows[i].title,
+                    content: response.data.rows[i].content,
+                    create_time: response.data.rows[i].create_time
+                })
+            }
+
+            $adminTable.bootstrapTable("removeAll");
+            $adminTable.bootstrapTable("prepend", blogArr);
+          })
+          .catch(function (error) {
+            console.log(error);
+        })
     }
 }

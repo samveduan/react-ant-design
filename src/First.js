@@ -1,8 +1,8 @@
 import React from 'react'
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { HashRouter, Route, Link } from 'react-router-dom'
-import Bs from './Bs'
+import Admin from './Admin'
 import FormCom from './FormCom'
 import One from './One'
 import ButtonCom from './ButtonCom'
@@ -46,12 +46,12 @@ export default class First extends React.Component {
         return (<div>
             <Layout>
                 <HashRouter>
-                    <Header className="header">
-                        <div className="logo" />
+                    <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%', paddingLeft: '20px'}}>
+                        <div className="logo" style={{fontSize: '32px', color: '#ffffff', fontWeight: 'bold'}}>React App</div>
                         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                            <Menu.Item key="1">nav 1</Menu.Item>
+                            {/*<Menu.Item key="1">nav 1</Menu.Item>
                             <Menu.Item key="2">nav 2</Menu.Item>
-                            <Menu.Item key="3">nav 3</Menu.Item>
+                            <Menu.Item key="3">nav 3</Menu.Item>*/}
                         </Menu>
                     </Header>
                     <Layout>
@@ -62,15 +62,16 @@ export default class First extends React.Component {
                             left: 0,
                         }}>
                             <Menu
+                                theme="dark"
                                 mode="inline"
                                 defaultSelectedKeys={['2']}
                                 defaultOpenKeys={['sub1']}
-                                style={{ height: '100%', borderRight: 0 }}
+                                style={{ height: '100%', paddingTop: '60px', borderRight: 0 }}
                                 onOpenChange={this.onOpenChange}
                                 openKeys={this.state.openKeys}
                             >
                                 <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                                    <Menu.Item key="1"><Link to="/bs">tree</Link></Menu.Item>
+                                    <Menu.Item key="1"><Link to="/admin">admin</Link></Menu.Item>
                                     <Menu.Item key="2"><Link to="/form">form</Link></Menu.Item>
                                     <Menu.Item key="3"><Link to="/one">One</Link></Menu.Item>
                                     <Menu.Item key="4"><Link to="/menu">Menu</Link></Menu.Item>
@@ -90,21 +91,15 @@ export default class First extends React.Component {
                                 </SubMenu>
                             </Menu>
                         </Sider>
-                        <Layout style={{ padding: '0 24px 24px', marginLeft: 200 }}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
-                                <Breadcrumb.Item>Home</Breadcrumb.Item>
-                                <Breadcrumb.Item>List</Breadcrumb.Item>
-                                <Breadcrumb.Item>App</Breadcrumb.Item>
-                            </Breadcrumb>
+                        <Layout style={{ padding: '84px 20px 20px', marginLeft: 200}}>
                             <Content
                                 className="site-layout-background"
                                 style={{
                                     padding: 24,
-                                    margin: 0,
-                                    height: '100%',
+                                    margin: 0
                                 }}
                             >
-                                <Route path="/bs" exact component={Bs}></Route>
+                                <Route path="/admin" exact component={Admin}></Route>
                                 <Route path="/form" component={FormCom}></Route>
                                 <Route path="/one" component={One}></Route>
                                 <Route path="/menu" component={MenuCom}></Route>
