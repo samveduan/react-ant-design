@@ -62,7 +62,7 @@ export default class Home extends Component {
 
     // 获取表格数据
     getData(pageNumber, pageSize) {
-        axios.get(`/article/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
+        axios.get(`/blog/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
             console.log("all data:");
             console.log(resp);
             let ajaxData = [];

@@ -98,6 +98,45 @@ const MenuList = [
                 icon: 'pie-chart'
             }
         ]
+    },
+    {
+        title: '异常页',
+        key: '/abnormal',
+        icon: PieChartOutlined,
+        children: [
+            {
+                title: '403',
+                key: '/403',
+                icon: 'bar-chart'
+            },
+            {
+                title: '404',
+                key: '/404',
+                icon: 'line-chart'
+            },
+            {
+                title: '500',
+                key: '/500',
+                icon: 'pie-chart'
+            }
+        ]
+    },
+    {
+        title: '结果页',
+        key: '/result',
+        icon: PieChartOutlined,
+        children: [
+            {
+                title: '成功',
+                key: '/success',
+                icon: 'bar-chart'
+            },
+            {
+                title: '失败',
+                key: '/fail',
+                icon: 'line-chart'
+            }
+        ]
     }
 ]
 
