@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Result, Button } from 'antd';
-import { Steps, Divider } from 'antd';
+import { Steps } from 'antd';
 import { Row, Col } from 'antd';
 import { Descriptions } from 'antd';
 
@@ -17,13 +17,13 @@ export default class Success extends Component {
                     extra={[
                         <Button type="primary" key="console">
                             返回列表
-      </Button>,
-                        <Button key="buy">查看项目</Button>,
+                        </Button>,
+                        <Button key="buy">查看项目</Button>
                     ]}
                 />
 
                 <Row>
-                    <Col span={24} style={{ background: '#f0f2f5', padding: 20}}>
+                    <Col span={24} style={{ padding: 20}}>
                         <Descriptions title="项目名称" style={{paddingBottom: 15}}>
                             <Descriptions.Item label="项目 ID">23421</Descriptions.Item>
                             <Descriptions.Item label="负责人">曲丽丽</Descriptions.Item>

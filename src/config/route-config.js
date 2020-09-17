@@ -1,4 +1,4 @@
-import { SnippetsFilled, PieChartFilled, ApiFilled, PieChartOutlined } from '@ant-design/icons';
+import { SnippetsFilled, PieChartFilled, ApiFilled, PieChartOutlined, ProfileOutlined, CheckSquareOutlined, BarChartOutlined, WhatsAppOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 const MenuList = [
     {
@@ -21,7 +21,7 @@ const MenuList = [
     {
         title: '数据展示',
         key: '/data_show',
-        icon: ApiFilled,
+        icon: BarChartOutlined,
         children: [
             {
                 title: 'table',
@@ -58,7 +58,7 @@ const MenuList = [
     {
         title: '反馈',
         key: '/feedback',
-        icon: ApiFilled,
+        icon: WhatsAppOutlined,
         children: [
             {
                 title: 'modal',
@@ -102,7 +102,7 @@ const MenuList = [
     {
         title: '异常页',
         key: '/abnormal',
-        icon: PieChartOutlined,
+        icon: ExclamationCircleOutlined,
         children: [
             {
                 title: '403',
@@ -122,9 +122,26 @@ const MenuList = [
         ]
     },
     {
+        title: '详情页',
+        key: '/detail',
+        icon: ProfileOutlined,
+        children: [
+            {
+                title: '基础详情页',
+                key: '/base-detail',
+                icon: 'bar-chart'
+            },
+            {
+                title: '高级详情页',
+                key: '/senior-detail',
+                icon: 'line-chart'
+            }
+        ]
+    },
+    {
         title: '结果页',
         key: '/result',
-        icon: PieChartOutlined,
+        icon: CheckSquareOutlined,
         children: [
             {
                 title: '成功',
@@ -133,7 +150,7 @@ const MenuList = [
             },
             {
                 title: '失败',
-                key: '/fail',
+                key: '/filure',
                 icon: 'line-chart'
             }
         ]

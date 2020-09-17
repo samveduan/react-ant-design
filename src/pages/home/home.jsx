@@ -62,9 +62,7 @@ export default class Home extends Component {
 
     // 获取表格数据
     getData(pageNumber, pageSize) {
-        axios.get(`/blog/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
-            console.log("all data:");
-            console.log(resp);
+        axios.get(`/article/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
             let ajaxData = [];
             for (let i = 0; i < resp.data.rows.length; i++) {
                 ajaxData.push({
@@ -98,15 +96,15 @@ export default class Home extends Component {
 
     addModalHandleOk = e => {
         this.addModalFormRef.current.validateFields()
-        .then(values => {
-            this.addModalFormRef.current.resetFields();
-            this.setState({
-                addModalVisible: false
+            .then(values => {
+                this.addModalFormRef.current.resetFields();
+                this.setState({
+                    addModalVisible: false
+                });
+            })
+            .catch(info => {
+                console.log('Validate Failed:', info);
             });
-        })
-        .catch(info => {
-            console.log('Validate Failed:', info);
-        });
     }
 
     addModalHandCancel = e => {
@@ -132,7 +130,7 @@ export default class Home extends Component {
         };
 
         return (
-            <Card title="Default size card" extra={<Button type="primary" ghost size="small" icon={<PlusOutlined/>} onClick={this.showAddModal}>添加</Button>} style={{ width: '100%' }}>
+            <Card title="Default size card" extra={<Button type="primary" ghost size="small" icon={<PlusOutlined />} onClick={this.showAddModal}>添加</Button>} style={{ width: '100%' }}>
                 <Table columns={this.state.columns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
                     onRow={record => {
                         return {

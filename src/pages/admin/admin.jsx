@@ -19,9 +19,11 @@ import ModalCom from '../feedback/modal'
 import ResultCom from '../feedback/result'
 import Com403 from '../abnormal/403'
 import Com404 from '../abnormal/404'
-import Com500 from '../result/success'
+import Com500 from '../abnormal/500'
+import baseDetail from '../detail/base-detail'
+import seniorDetail from '../detail/senior-detail'
 import SuccessCom from '../result/success'
-import FailCom from '../result/fail'
+import FailurelCom from '../result/failure'
 import './admin.less'
 
 const { Content, Sider } = Layout;
@@ -78,8 +80,10 @@ export default class Admin extends Component {
                                 <Route path="/403" component={Com403}></Route>
                                 <Route path="/404" component={Com404}></Route>
                                 <Route path="/500" component={Com500}></Route>
+                                <Route path="/base-detail" component={baseDetail}></Route>
+                                <Route path="/senior-detail" component={seniorDetail}></Route>
                                 <Route path="/success" component={SuccessCom}></Route>
-                                <Route path="/fail" component={FailCom}></Route>
+                                <Route path="/filure" component={FailurelCom}></Route>
                                 <Redirect to="/home" />
                             </Switch>
                         </Content>
