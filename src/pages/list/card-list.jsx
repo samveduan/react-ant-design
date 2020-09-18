@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class searchList extends Component {
+export default class cardList extends Component {
     render() {
         return (
             <div>
-                searchList
+                cardList
             </div>
         )
     }

@@ -20,6 +20,13 @@ import ResultCom from '../feedback/result'
 import Com403 from '../abnormal/403'
 import Com404 from '../abnormal/404'
 import Com500 from '../abnormal/500'
+import BaseForm from '../form/base-form'
+import StepForm from '../form/step-form'
+import AdvancedForm from '../form/advanced-form'
+import SearchList from '../list/search-list'
+import QueryTable from '../list/query-table'
+import StandardList from '../list/standard-list'
+import CardList from '../list/card-list'
 import baseDetail from '../detail/base-detail'
 import seniorDetail from '../detail/senior-detail'
 import SuccessCom from '../result/success'
@@ -84,6 +91,15 @@ export default class Admin extends Component {
                                 <Route path="/senior-detail" component={seniorDetail}></Route>
                                 <Route path="/success" component={SuccessCom}></Route>
                                 <Route path="/filure" component={FailurelCom}></Route>
+
+                                <Route path="/base-form" component={BaseForm}></Route>
+                                <Route path="/step-form" component={StepForm}></Route>
+                                <Route path="/advanced-form" component={AdvancedForm}></Route>
+
+                                <Route path="/search-list" component={SearchList}></Route>
+                                <Route path="/query-table" component={QueryTable}></Route>
+                                <Route path="/standard-list" component={StandardList}></Route>
+                                <Route path="/card-list" component={CardList}></Route>
                                 <Redirect to="/home" />
                             </Switch>
                         </Content>
