@@ -1,7 +1,5 @@
-import React, { Component } from 'react'
-import { Table, Pagination, Card, Modal, Button, Form, Input, InputNumber, Select, Checkbox, Radio, notification } from 'antd'
-import { PlusOutlined } from '@ant-design/icons';
-import axios from 'axios'
+import React, { Component } from 'react';
+import { Modal, Form, Input, Button, InputNumber, Select, Checkbox, Radio } from 'antd';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -15,151 +13,58 @@ const layout = {
     }
 };
 
-export default class Home extends Component {
+export default class ModalForm extends Component {
     state = {
-        tableData: [],
-        selectedRowKeys: [], // Check here to configure the default column
-        total: 0, // for Pagination
-        columns: [
-            {
-                title: 'ID',
-                dataIndex: 'id',
-                width: 30,
-            },
-            {
-                title: '标题',
-                dataIndex: 'title',
-                width: 500,
-            },
-            {
-                title: '内容',
-                dataIndex: 'content'
-            },
-        ],
-        addModalVisible: false
-    };
-
-    handleDeleteArticle() {
-        if (this.state.selectedRowKeys.length === 0) {
-            notification['error']({
-                message: '错误提示',
-                description:
-                    '请选择要删除的内容！',
-            });
-        } else {
-            notification['success']({
-                message: '正确提示',
-                description:
-                    `将要删除${JSON.stringify(this.state.selectedRowKeys)}`,
-            });
-        }
+        visible: false
     }
 
-    onSelectChange = selectedRowKeys => {
-        console.log('selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({ selectedRowKeys });
-    };
-
-    // 获取表格数据
-    getData(pageNumber, pageSize) {
-        axios.get(`/blog/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
-            let ajaxData = [];
-            for (let i = 0; i < resp.data.rows.length; i++) {
-                ajaxData.push({
-                    key: resp.data.rows[i].id,
-                    id: resp.data.rows[i].id,
-                    title: resp.data.rows[i].title,
-                    content: resp.data.rows[i].content,
-                });
-            }
-
-            this.setState({
-                tableData: ajaxData,
-                total: resp.data.total
-            })
-
-        }, (err) => {
-            console.log(err);
+    showModal = () => {
+        this.setState({
+            visible: true
         });
     }
 
-    onChange = (pageNumber, pageSize) => {
-        this.getData(pageNumber, pageSize);
-    };
-
-    // add modal
-    showAddModal = () => {
-        this.setState({
-            addModalVisible: true
-        })
-    }
-
-    addModalHandleOk = e => {
-        this.addModalFormRef.current.validateFields()
-            .then(values => {
-                this.addModalFormRef.current.resetFields();
-                this.setState({
-                    addModalVisible: false
-                });
+    handleOk = () => {
+        this.formRef.current.validateFields().then(values => {
+            this.formRef.current.resetFields();
+            this.setState({
+                visible: false
             })
-            .catch(info => {
-                console.log('Validate Failed:', info);
-            });
+            console.log(values);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
-    addModalHandCancel = e => {
-        this.addModalFormRef.current.resetFields();
+    handCancel = () => {
         this.setState({
-            addModalVisible: false
-        })
+            visible: false
+        });
     }
 
     // 表单相关
-    addModalFormRef = React.createRef(); // 定义一个表单
-
-    componentDidMount() {
-        this.getData(1, 10);
-    }
+    formRef = React.createRef(); // 定义一个表单
 
     render() {
-        const { selectedRowKeys } = this.state;
-
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange
-        };
-
         return (
-            <Card title="Default size card" extra={<Button type="primary" ghost size="small" icon={<PlusOutlined />} onClick={this.showAddModal}>添加</Button>} style={{ width: '100%' }}>
-                <Table columns={this.state.columns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
-                    onRow={record => {
-                        return {
-                            onClick: event => { console.log(record) },
-                            onDoubleClick: event => { console.log(event) }
-                        }
-                    }}
-                >
-                </Table>
-                <div style={{ height: 15 }}></div>
-                <Pagination
-                    total={this.state.total}
-                    showSizeChanger
-                    showQuickJumper
-                    showTotal={total => `共 ${total} 条`}
-                    onChange={this.onChange}
-                />
+            <div>
+                <Button type="primary" onClick={this.showModal}>
+                    创建
+        	    </Button>
+
                 <Modal
                     title="创建"
-                    visible={this.state.addModalVisible}
+                    visible={this.state.visible}
                     width={660}
-                    onOk={this.addModalHandleOk}
-                    onCancel={this.addModalHandCancel}
+                    onOk={this.handleOk}
+                    onCancel={this.handCancel}
                     okText="确认"
                     cancelText="取消"
                     maskClosable={false}
                     destroyOnClose={true}
                 >
-                    <Form {...layout} ref={this.addModalFormRef} name="control-ref" preserve={false}>
+                    <Form {...layout} ref={this.formRef} name="control-ref" preserve={false}>
                         <Form.Item label="账号" style={{ marginBottom: 0 }}>
                             <Form.Item
                                 name="account"
@@ -218,7 +123,7 @@ export default class Home extends Component {
                             >
                                 <InputNumber style={{ width: 160, marginRight: 15 }} placeholder="1-100之间整数" />
                             </Form.Item>
-                        G
+                            G
                 </Form.Item>
                         <Form.Item label="私密空间配额">
                             <Form.Item
@@ -238,7 +143,7 @@ export default class Home extends Component {
                             >
                                 <InputNumber style={{ width: 160, marginRight: 15 }} placeholder="1-100之间整数" />
                             </Form.Item>
-                        G
+                            G
                 </Form.Item>
                         <Form.Item label="证书级别" style={{ marginBottom: 0 }}>
                             <Form.Item
@@ -311,7 +216,7 @@ export default class Home extends Component {
                         </Form.Item>
                     </Form>
                 </Modal>
-            </Card>
+            </div>
         )
     }
 }

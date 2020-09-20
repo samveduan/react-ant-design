@@ -24,7 +24,7 @@ export default class Login extends Component {
     onFinish = values => {
         $http({
           method: "POST",
-          url: "/article/check_login_status/",
+          url: "/blog/check_login_status/",
           data: JSON.stringify(values)
         })
         .then(res => {

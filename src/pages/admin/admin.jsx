@@ -21,6 +21,7 @@ import Com403 from '../abnormal/403'
 import Com404 from '../abnormal/404'
 import Com500 from '../abnormal/500'
 import BaseForm from '../form/base-form'
+import ModalForm from '../form/modal-form'
 import StepForm from '../form/step-form'
 import AdvancedForm from '../form/advanced-form'
 import SearchList from '../list/search-list'
@@ -80,7 +81,7 @@ export default class Admin extends Component {
                                 <Route path="/card" component={CardCom}></Route>
                                 <Route path="/timeline" component={TimelineCom}></Route>
                                 <Route path="/descriptions" component={DescriptionsCom}></Route>
-                                <Route path="/modal" component={ModalCom}></Route>
+                                <Route path="/modal1" component={ModalCom}></Route>
                                 <Route path="/empty" component={EmptyCom}></Route>
                                 <Route path="/result" component={ResultCom}></Route>
                                 <Route path="/notification" component={NotificationCom}></Route>
@@ -93,6 +94,7 @@ export default class Admin extends Component {
                                 <Route path="/filure" component={FailurelCom}></Route>
 
                                 <Route path="/base-form" component={BaseForm}></Route>
+                                <Route path="/modal-form" component={ModalForm}></Route>
                                 <Route path="/step-form" component={StepForm}></Route>
                                 <Route path="/advanced-form" component={AdvancedForm}></Route>
 

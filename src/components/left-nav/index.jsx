@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom'
 import MenuList from '../../config/route-config'
+import './index.less'
 
 const { SubMenu } = Menu;
 

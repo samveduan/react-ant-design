@@ -6,8 +6,11 @@ export default class TableCom extends React.Component {
     state = {
         tableData: [],
         selectedRowKeys: [], // Check here to configure the default column
-        total: 0, // for Pagination
-        columns: [
+        total: 0 // for Pagination
+    };
+
+    getTableColumns = () => {
+        return [
             {
                 title: 'ID',
                 dataIndex: 'id',
@@ -23,7 +26,11 @@ export default class TableCom extends React.Component {
                 dataIndex: 'content'
             },
         ]
-    };
+    }
+
+    componentWillMount() {
+        this.TableColumns = this.getTableColumns();
+    }
 
     handleDeleteArticle() {
         if (this.state.selectedRowKeys.length === 0) {
@@ -48,7 +55,7 @@ export default class TableCom extends React.Component {
 
     // 获取表格数据
     getData(pageNumber, pageSize) {
-        axios.get(`/article/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
+        axios.get(`/blog/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
             console.log("all data:");
             console.log(resp);
             let ajaxData = [];
@@ -93,7 +100,7 @@ export default class TableCom extends React.Component {
             </Row>
             <Row>
                 <Col span={24}>
-                    <Table columns={this.state.columns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
+                    <Table columns={this.TableColumns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
                         onRow={record => {
                             return {
                                 onClick: event => { console.log(record) },

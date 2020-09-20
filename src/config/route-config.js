@@ -29,21 +29,6 @@ const MenuList = [
                 icon: 'bar-chart'
             },
             {
-                title: 'tabs',
-                key: '/tabs',
-                icon: 'line-chart'
-            },
-            {
-                title: 'card',
-                key: '/card',
-                icon: 'line-chart'
-            },
-            {
-                title: 'empty',
-                key: '/empty',
-                icon: 'line-chart'
-            },
-            {
                 title: 'timeline ',
                 key: '/timeline',
                 icon: 'line-chart'
@@ -62,17 +47,12 @@ const MenuList = [
         children: [
             {
                 title: 'modal',
-                key: '/modal',
+                key: '/modal1',
                 icon: 'bar-chart'
             },
             {
                 title: 'notification',
                 key: '/notification',
-                icon: 'line-chart'
-            },
-            {
-                title: 'result',
-                key: '/result',
                 icon: 'line-chart'
             }
         ]
@@ -117,6 +97,60 @@ const MenuList = [
             {
                 title: '500',
                 key: '/500',
+                icon: 'pie-chart'
+            }
+        ]
+    },
+    {
+        title: '表单页',
+        key: '/form',
+        icon: ExclamationCircleOutlined,
+        children: [
+            {
+                title: '基础表单',
+                key: '/base-form',
+                icon: 'bar-chart'
+            },
+            {
+                title: '模态表单',
+                key: '/modal-form',
+                icon: 'bar-chart'
+            },
+            {
+                title: '分步表单',
+                key: '/step-form',
+                icon: 'line-chart'
+            },
+            {
+                title: '高级表单',
+                key: '/advanced-form',
+                icon: 'pie-chart'
+            }
+        ]
+    },
+    {
+        title: '列表页',
+        key: '/list',
+        icon: ExclamationCircleOutlined,
+        children: [
+            {
+                title: '搜索列表',
+                key: '/search-list',
+                icon: 'bar-chart'
+            },
+            {
+                title: '查询表格',
+                key: '/query-table',
+                icon: 'line-chart'
+            },
+            {
+                title: '标准列表',
+                key: '/standard-list',
+                icon: 'pie-chart'
+            },
+            {
+                title: '卡片列表',
+                key: '/card-list',
                 icon: 'pie-chart'
             }
         ]
