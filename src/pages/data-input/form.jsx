@@ -44,7 +44,7 @@ export default class FormCom extends React.Component {
 
     render() {
         return (<>
-            <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+            <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish} style={{background: '#FFFFFF', paddingTop: 15, paddingBottom: 15}}>
                 <Form.Item label="账号" style={{ marginBottom: 0}}>
                     <Form.Item
                         name="account"

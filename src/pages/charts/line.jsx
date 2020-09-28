@@ -70,7 +70,7 @@ export default class Line extends React.Component {
 
     render() {
         return (<>
-            <div id="line-chart" style={{height: 300}}></div>
+            <div id="line-chart" style={{height: 300, background: '#FFFFFF', paddingRight: 50}}></div>
         </>)
     }
 }

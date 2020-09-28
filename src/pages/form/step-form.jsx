@@ -85,7 +85,7 @@ export default class StepForm extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{padding: 15, background: '#FFFFFF'}}>
                 <Steps current={this.state.current}>
                     <Step title="填写转账信息" />
                     <Step title="确认转账信息" />

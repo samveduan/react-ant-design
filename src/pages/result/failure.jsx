@@ -11,6 +11,7 @@ export default class failure extends Component {
             <Result
                 status="error"
                 title="提交失败"
+                className="result-container"
                 subTitle="请核对并修改以下信息后，再重新提交。"
                 extra={[
                     <Button type="primary" key="console">

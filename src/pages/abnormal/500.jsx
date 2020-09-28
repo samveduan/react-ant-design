@@ -9,6 +9,7 @@ export default class Comp500 extends Component {
                 title="500"
                 subTitle="Sorry, something went wrong."
                 extra={<Button type="primary">Back Home</Button>}
+                style={{background: '#FFFFFF'}}
             />
         )
     }

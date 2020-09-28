@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Table, Pagination, Card, Modal, Button, Form, Input, InputNumber, Select, Checkbox, Radio, notification } from 'antd'
 import { PlusOutlined } from '@ant-design/icons';
+import { DatePicker } from 'antd';
 import axios from 'axios'
+import echarts from 'echarts'
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -15,8 +17,11 @@ const layout = {
     }
 };
 
+const { RangePicker } = DatePicker;
+
 export default class Home extends Component {
     state = {
+        noTitleKey: 'article', // for tabs
         tableData: [],
         selectedRowKeys: [], // Check here to configure the default column
         total: 0, // for Pagination
@@ -39,6 +44,95 @@ export default class Home extends Component {
         addModalVisible: false
     };
 
+    // for tabs
+    getTabListNoTitle = () => {
+        return [
+            {
+                key: 'article',
+                tab: '销售量'
+            },
+            {
+                key: 'app',
+                tab: '访问量'
+            }
+        ];
+    }
+
+    contentListNoTitle = () => {
+        return {
+            article: <div id="sales-volume-chart" style={{ height: 300 }}>article content</div>,
+            app: <div id="visits-chart" style={{ height: 300 }}>app content</div>
+        };
+    }
+
+    getSalesVolumeChartData = () => {
+        return {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '15%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    axisTick: {
+                        alignWithLabel: true
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: [
+                {
+                    name: '直接访问',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: [10, 52, 200, 334, 390, 330, 220]
+                }
+            ]
+        };
+    }
+
+    initSalesVolumeChart = () => {
+        let salesVolumeChart = echarts.init(document.getElementById('sales-volume-chart'));
+        salesVolumeChart.setOption(this.getSalesVolumeChartData());
+    }
+
+    onTabChange = (key, type) => {
+        this.setState({ [type]: key });
+        let _this = this;
+        if(key = 'article'){
+            setTimeout(function(){
+                _this.initSalesVolumeChart();
+            }, 500)
+        }
+    };
+
+    getTabBarExtraContent = () => {
+        return (<>
+            <Radio.Group type="text" style={{ marginRight: 15 }}>
+                <Radio.Button value="today" type="text">今日</Radio.Button>
+                <Radio.Button value="week" type="text">本周</Radio.Button>
+                <Radio.Button value="month" type="text">本月</Radio.Button>
+                <Radio.Button value="year" type="text">全年</Radio.Button>
+            </Radio.Group>
+            <RangePicker />
+        </>)
+    }
+
+    // for table
     handleDeleteArticle() {
         if (this.state.selectedRowKeys.length === 0) {
             notification['error']({
@@ -62,7 +156,7 @@ export default class Home extends Component {
 
     // 获取表格数据
     getData(pageNumber, pageSize) {
-        axios.get(`/blog/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
+        axios.get(`/article/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
             let ajaxData = [];
             for (let i = 0; i < resp.data.rows.length; i++) {
                 ajaxData.push({
@@ -87,7 +181,7 @@ export default class Home extends Component {
         this.getData(pageNumber, pageSize);
     };
 
-    // add modal
+    // for modal
     showAddModal = () => {
         this.setState({
             addModalVisible: true
@@ -119,6 +213,7 @@ export default class Home extends Component {
 
     componentDidMount() {
         this.getData(1, 10);
+        this.initSalesVolumeChart();
     }
 
     render() {
@@ -129,7 +224,21 @@ export default class Home extends Component {
             onChange: this.onSelectChange
         };
 
-        return (
+        return (<>
+            <Card
+                style={{ width: '100%' }}
+                tabList={this.getTabListNoTitle()}
+                activeTabKey={this.state.noTitleKey}
+                tabBarExtraContent={this.getTabBarExtraContent()}
+                onTabChange={key => {
+                    this.onTabChange(key, 'noTitleKey');
+                }}
+            >
+                {this.contentListNoTitle()[this.state.noTitleKey]}
+            </Card>
+
+            <div style={{ height: 15 }}></div>
+
             <Card title="Default size card" extra={<Button type="primary" ghost size="small" icon={<PlusOutlined />} onClick={this.showAddModal}>添加</Button>} style={{ width: '100%' }}>
                 <Table columns={this.state.columns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
                     onRow={record => {
@@ -312,6 +421,7 @@ export default class Home extends Component {
                     </Form>
                 </Modal>
             </Card>
+        </>
         )
     }
 }

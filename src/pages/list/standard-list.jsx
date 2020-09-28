@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Statistic, Row, Col, Card, Table, Radio, Button, Space, Menu, Dropdown, Progress, Input } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import './standard-list.less'
 
 const { Search } = Input;
 
@@ -102,7 +103,7 @@ export default class standardList extends Component {
     render() {
         return (
             <div>
-                <Row style={{ textAlign: 'center', paddingBottom: 20 }}>
+                <Row className="statistic">
                     <Col span={8}>
                         <Statistic title="我的待办" value={'8个任务'} />
                     </Col>

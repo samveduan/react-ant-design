@@ -38,14 +38,14 @@ export default class AdvancedForm extends Component {
                                 <Form.Item
                                     label="仓库名"
                                     name="storename"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请输入仓库名!' }]}
                                 >
                                     <Input placeholder="请输入仓库名" />
                                 </Form.Item>
                                 <Form.Item
                                     label="审批人"
                                     name="approver"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请选择审批人!' }]}
                                 >
                                     <Select placeholder="请选择审批员">
                                         <Option value="jack">付晓晓</Option>
@@ -57,14 +57,14 @@ export default class AdvancedForm extends Component {
                                 <Form.Item
                                     label="仓库域名"
                                     name="domainname"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请输入仓库域名!' }]}
                                 >
                                     <Input addonBefore="http://" addonAfter=".com" placeholder="请输入" />
                                 </Form.Item>
                                 <Form.Item
                                     label="生效日期"
                                     name="date"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请选择生效日期!' }]}
                                 >
                                     <RangePicker style={{width: '100%'}}/>
                                 </Form.Item>
@@ -73,7 +73,7 @@ export default class AdvancedForm extends Component {
                                 <Form.Item
                                     label="仓库管理员"
                                     name="admin"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请选择仓库管理员!' }]}
                                 >
                                     <Select placeholder="请选择管理员">
                                         <Option value="jack">付晓晓</Option>
@@ -83,7 +83,7 @@ export default class AdvancedForm extends Component {
                                 <Form.Item 
                                     label="仓库类型"
                                     name="type"
-                                    rules={[{ required: true, message: 'Please input your username!' }]}
+                                    rules={[{ required: true, message: '请选择仓库类型!' }]}
                                 >
                                     <Select placeholder="请选择仓库类型">
                                         <Option value="jack">私密</Option>

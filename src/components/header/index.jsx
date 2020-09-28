@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Row, Col, Layout, Menu, Modal, Dropdown } from 'antd';
+import { Row, Col, Layout, Menu, Modal, Dropdown, Button } from 'antd';
+import { Badge } from 'antd';
 import { withRouter } from 'react-router-dom'
-import { ExclamationCircleOutlined, DownOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, DownOutlined, BellOutlined, LoginOutlined } from '@ant-design/icons';
+import logo from './images/logo.svg'
 import './index.less'
 
 const { Header } = Layout;
@@ -17,12 +19,12 @@ class HeaderCom extends Component {
             content: '',
             onOk() {
                 localStorage['token'] = 0;
-                setTimeout(function(){
+                setTimeout(function () {
                     _this.props.history.replace("/login");
                 }, 1000)
             },
             onCancel() {
-              console.log('Cancel');
+                console.log('Cancel');
             },
             okText: '确定',
             cancelText: '取消'
@@ -32,7 +34,7 @@ class HeaderCom extends Component {
     render() {
         const menu = (
             <Menu>
-                <Menu.Item>
+                <Menu.Item icon={<LoginOutlined/>}>
                     <a target="_blank" rel="noopener noreferrer" href="#" onClick={this.loginOut}>
                         退出
                     </a>
@@ -43,9 +45,12 @@ class HeaderCom extends Component {
         return (
             <Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%', paddingLeft: '20px' }}>
                 <Row>
-                    <Col span={10}><div className="logo">React App管理系统</div></Col>
+                    <Col span={10}><div className="logo"><img src={logo} />React App管理系统</div></Col>
                     <Col span={2} offset={12} style={{ textAlign: 'right' }}>
-                        <Dropdown overlay={menu} trigger={['click']}>
+                        <Badge count={15} size='small' offset={[-15, -5]} showZero overflowCount={10} title={15}>
+                            <BellOutlined style={{ color: '#FFFFFF', cursor: 'pointer', marginRight: 30 }} />
+                        </Badge>
+                        <Dropdown overlay={menu} trigger={['hover']}>
                             <a className="ant-dropdown-link" href="#" onClick={e => e.preventDefault()}>
                                 admin <DownOutlined />
                             </a>

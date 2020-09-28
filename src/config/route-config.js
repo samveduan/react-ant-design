@@ -1,10 +1,27 @@
-import { SnippetsFilled, PieChartFilled, ApiFilled, PieChartOutlined, ProfileOutlined, CheckSquareOutlined, BarChartOutlined, WhatsAppOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { SnippetsFilled, PieChartFilled, PieChartOutlined, ProfileOutlined, CheckSquareOutlined, BarChartOutlined, WhatsAppOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 
 const MenuList = [
     {
         title: '首页', // 菜单标题名称
         key: '/home', // 对应的path
-        icon: SnippetsFilled // 图标名称
+        icon: SnippetsFilled, // 图标名称,
+        children: [ // 子菜单列表
+            {
+                title: '分析页',
+                key: '/home',
+                icon: 'bars'
+            },
+            {
+                title: '监控页',
+                key: '/monitor',
+                icon: 'bars'
+            },
+            {
+                title: '工作台',
+                key: '/workbench',
+                icon: 'bars'
+            }
+        ]
     },
     {
         title: '数据录入',

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Descriptions, Badge, Table, Typography } from 'antd';
+import './base-detail.less'
 
 const { Title } = Typography;
 
@@ -125,8 +126,8 @@ const data = [
 export default class baseDetail extends Component {
   render() {
     return (
-      <div style={{ padding: 20 }}>
-        <Descriptions title="退款申请" bordered style={{ paddingBottom: 15 }}>
+      <div style={{ padding: 20, background: '#FFFFFF' }}>
+        <Descriptions title="退款申请" bordered>
           <Descriptions.Item label="取货单号">1000000000</Descriptions.Item>
           <Descriptions.Item label="状态">已取货</Descriptions.Item>
           <Descriptions.Item label="销售单号">1234123421</Descriptions.Item>

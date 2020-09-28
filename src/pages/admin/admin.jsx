@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { Layout } from 'antd';
+import { Layout } from 'antd'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import LeftNav from '../../components/left-nav/'
 import HeaderCom from '../../components/header/'
 import HomeCom from '../home/home'
+import MonitorCom from '../home/monitor.jsx'
+import WorkbenchCom from '../home/workbench.jsx'
 import LineCom from '../charts/line'
 import BarCom from '../charts/bar'
 import PieCom from '../charts/pie'
@@ -69,9 +71,12 @@ export default class Admin extends Component {
                     <Layout className="site-layout" style={{ paddingTop: 64 }}>
                         <Content
                             className="main-content"
+                            style={{overflowX: 'hidden'}}
                         >
                             <Switch>
                                 <Route path="/home" component={HomeCom}></Route>
+                                <Route path="/monitor" component={MonitorCom}></Route>
+                                <Route path="/workbench" component={WorkbenchCom}></Route>
                                 <Route path="/line" component={LineCom}></Route>
                                 <Route path="/bar" component={BarCom}></Route>
                                 <Route path="/pie" component={PieCom}></Route>
@@ -92,12 +97,10 @@ export default class Admin extends Component {
                                 <Route path="/senior-detail" component={seniorDetail}></Route>
                                 <Route path="/success" component={SuccessCom}></Route>
                                 <Route path="/filure" component={FailurelCom}></Route>
-
                                 <Route path="/base-form" component={BaseForm}></Route>
                                 <Route path="/modal-form" component={ModalForm}></Route>
                                 <Route path="/step-form" component={StepForm}></Route>
                                 <Route path="/advanced-form" component={AdvancedForm}></Route>
-
                                 <Route path="/search-list" component={SearchList}></Route>
                                 <Route path="/query-table" component={QueryTable}></Route>
                                 <Route path="/standard-list" component={StandardList}></Route>

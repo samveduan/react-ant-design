@@ -26,7 +26,7 @@ class LeftNav extends Component {
 
     // 获取左侧菜单
     getMenuNodes = MenuList => {
-        const path = this.props.location.pathname
+        const path = this.props.location.pathname;
 
         return MenuList.map(item => {
             if (!item.children) {

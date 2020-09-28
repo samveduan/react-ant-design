@@ -53,7 +53,7 @@ export default class BaseForm extends React.Component {
     render() {
         return (
             <>
-                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish}>
+                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish} style={{padding: 15, background: '#FFFFFF'}}>
                     <Form.Item label="账号" style={{ marginBottom: 0 }}>
                         <Form.Item
                             name="account"
