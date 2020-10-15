@@ -112,12 +112,6 @@ export default class Home extends Component {
 
     onTabChange = (key, type) => {
         this.setState({ [type]: key });
-        let _this = this;
-        if(key = 'article'){
-            setTimeout(function(){
-                _this.initSalesVolumeChart();
-            }, 500)
-        }
     };
 
     getTabBarExtraContent = () => {

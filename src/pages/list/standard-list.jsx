@@ -7,23 +7,25 @@ const { Search } = Input;
 
 export default class standardList extends Component {
     state = {
-        TableData: []
+        tableData: []
     }
 
-    menu = (
-        <Menu>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                    编辑
-            </a>
-            </Menu.Item>
-            <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                    删除
-            </a>
-            </Menu.Item>
-        </Menu>
-    );
+    getMenu = () => {
+        return (
+            <Menu>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                        编辑
+                </a>
+                </Menu.Item>
+                <Menu.Item>
+                    <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                        删除
+                </a>
+                </Menu.Item>
+            </Menu>
+        )
+    }
 
     getColumns = () => {
         return [
@@ -66,12 +68,8 @@ export default class standardList extends Component {
         ];
     }
 
-    componentWillMount() {
-        this.tableColumns = this.getColumns();
-    }
-
-    componentDidMount() {
-        this.TableData = [
+    getTableData = () => {
+        return [
             {
                 key: '1',
                 name: 'John Brown',
@@ -94,9 +92,16 @@ export default class standardList extends Component {
                 process: 81,
             },
         ];
+    }
 
+    componentWillMount() {
+        this.menu = this.getMenu();
+        this.tableColumns = this.getColumns();
+    }
+
+    componentDidMount() {
         this.setState({
-            TableData: this.TableData
+            tableData: this.getTableData()
         })
     }
 
@@ -115,19 +120,19 @@ export default class standardList extends Component {
                     </Col>
                 </Row>
 
-                <Card title="基本列表" 
+                <Card title="基本列表"
                     extra={<><Radio.Group defaultValue="a">
                         <Radio.Button value="a">全部</Radio.Button>
                         <Radio.Button value="b">进行中</Radio.Button>
                         <Radio.Button value="c">等待中</Radio.Button>
                     </Radio.Group>
-                    <Search
+                        <Search
                             placeholder="请输入"
                             onSearch={value => console.log(value)}
                             style={{ marginLeft: 15, width: 200 }}
                         /></>} style={{ width: '100%' }}
                 >
-                    <Table columns={this.tableColumns} dataSource={this.state.TableData} />
+                    <Table columns={this.tableColumns} dataSource={this.state.tableData} />
                 </Card>
             </div>
         )

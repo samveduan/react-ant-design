@@ -169,6 +169,11 @@ const MenuList = [
                 title: '卡片列表',
                 key: '/card-list',
                 icon: 'pie-chart'
+            },
+            {
+                title: '树列表',
+                key: '/tree-list',
+                icon: 'pie-chart'
             }
         ]
     },

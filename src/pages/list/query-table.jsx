@@ -10,11 +10,14 @@ import './query-table.less'
 
 export default class queryTable extends Component {
     state = {
+        tableLoading: true,
         tableData: [],
         total: 0,
-        createRuleModal_Visible: false,
-        tableLoading: true
+        createRuleModal_Visible: false
     }
+
+    // 搜索表单
+    formRef = React.createRef()
 
     formRef_onFinish = () => {
         this.formRef.current.validateFields()
@@ -30,8 +33,7 @@ export default class queryTable extends Component {
         this.formRef.current.resetFields();
     }
 
-    formRef = React.createRef()
-
+    // 表格
     getTableColumns = () => {
         return [
             {
@@ -51,7 +53,6 @@ export default class queryTable extends Component {
         ]
     }
 
-    // 获取表格数据
     getData(pageNumber, pageSize) {
         this.setState({
             tableLoading: true
@@ -118,7 +119,7 @@ export default class queryTable extends Component {
     }
 
     componentDidMount() {
-        this.getData(1, 10);
+        this.getData(1, 5);
     }
 
     render() {
@@ -187,9 +188,14 @@ export default class queryTable extends Component {
                         </Col>
                     </Row>
                 </Form>
+
                 <Card title="查询表格" extra={extraButton} style={{ width: '100%' }}>
                     <Spin spinning={this.state.tableLoading} tip='加载中...' size='large'>
-                        <Table columns={this.TableColumns} dataSource={this.state.tableData} pagination={false} bordered
+                        <Table
+                            columns={this.TableColumns}
+                            dataSource={this.state.tableData}
+                            pagination={false}
+                            bordered
                             onRow={record => {
                                 return {
                                     onClick: event => { console.log(record) },
@@ -201,6 +207,8 @@ export default class queryTable extends Component {
                     </Spin>
                     <div style={{ height: 15 }}></div>
                     <Pagination
+                        pageSizeOptions={[5, 10, 20, 50, 100]}
+                        defaultPageSize={5}
                         total={this.state.total}
                         showSizeChanger
                         showQuickJumper

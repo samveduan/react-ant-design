@@ -3,16 +3,48 @@ import { Row, Col, Card, Button } from 'antd';
 import { Typography } from 'antd'
 import { List, Avatar } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import antd from './images/antd.png'
-import ai from './images/ai.png'
-import alipay from './images/alipay.png'
-import bootstrap from './images/bootstrap.png'
-import pro from './images/pro.png'
-import react from './images/react.png'
 import avatar from './images/avatar.png'
 import './workbench.less'
 
 const { Title, Paragraph, Text } = Typography;
+
+const cardList = [{
+    title: 'Alipay',
+    img: 'antd.png',
+    describe: '那是一种内在的东西，他们到达不了，也无法触及的.',
+    group: '科学搬砖组',
+    time: '9天前'
+}, {
+    title: 'Angular',
+    img: 'ai.png',
+    describe: '希望是一个好东西，也许是最好的，好东西是不会消亡.',
+    group: '科学搬砖组',
+    time: '9天前'
+}, {
+    title: 'Ant Design',
+    img: 'alipay.png',
+    describe: '城镇中有那么多的酒馆，她却偏偏走进了我的酒馆.',
+    group: '科学搬砖组',
+    time: '9天前'
+}, {
+    title: 'Ant Design Pro',
+    img: 'bootstrap.png',
+    describe: '那时候我只会想自己想要什么，从不想自己拥有什么.',
+    group: '科学搬砖组',
+    time: '9天前'
+}, {
+    title: 'Bootstrap',
+    img: 'pro.png',
+    describe: '凛冬将至.',
+    group: '科学搬砖组',
+    time: '9天前'
+}, {
+    title: 'React',
+    img: 'react.png',
+    describe: '生命就像一盒巧克力，结果往往出人意料.',
+    group: '科学搬砖组',
+    time: '9天前'
+}];
 
 const data = [
     {
@@ -36,67 +68,48 @@ const data = [
 ];
 
 const groupData = [{
-    img: antd,
+    img: 'antd.png',
     title: '科学搬砖组'
 },
 {
-    img: ai,
+    img: 'ai.png',
     title: '全组都是吴彦祖'
 },
 {
-    img: alipay,
+    img: 'alipay.png',
     title: '中二少女团'
 },
 {
-    img: bootstrap,
+    img: 'bootstrap.png',
     title: '程序员日常'
 },
 {
-    img: pro,
+    img: 'pro.png',
     title: '高逼格设计天团'
 },
 {
-    img: react,
+    img: 'react.png',
     title: '骗你来学计算机'
 }];
 
 export default class workbench extends Component {
+    getCardList = cardList => {
+        return cardList.map((value, index) => {
+            return (<Card.Grid className="grid-style" key={index}>
+                <Title level={5} className="grid-title"><img src={require('./images/' + value.img)} /> {value.title}</Title>
+                <Paragraph className="grid-paragraph">{value.describe}</Paragraph>
+                <Paragraph className="grid-paragraph"><Text>{value.group}</Text> <Text className="grid-time">{value.time}</Text></Paragraph>
+            </Card.Grid>)
+        })
+    }
+
     render() {
         return (
             <div>
                 <Row gutter={16}>
                     <Col span={17}>
                         <Card title="进行中的项目" extra={<a>全部项目</a>}>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={antd} /> Alipay</Title>
-                                <Paragraph className="grid-paragraph">那是一种内在的东西，他们到达不了，也无法触及的.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={ai} />Angular</Title>
-                                <Paragraph className="grid-paragraph">希望是一个好东西，也许是最好的，好东西是不会消亡.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={alipay} />Ant Design</Title>
-                                <Paragraph className="grid-paragraph">城镇中有那么多的酒馆，她却偏偏走进了我的酒馆.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={bootstrap} />Ant Design Pro</Title>
-                                <Paragraph className="grid-paragraph">那时候我只会想自己想要什么，从不想自己拥有什么.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={pro} />Bootstrap</Title>
-                                <Paragraph className="grid-paragraph">凛冬将至.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
-                            <Card.Grid className="grid-style">
-                                <Title level={5} className="grid-title"><img src={react} />React</Title>
-                                <Paragraph className="grid-paragraph">生命就像一盒巧克力，结果往往出人意料.</Paragraph>
-                                <Paragraph className="grid-paragraph"><Text>科学搬砖组</Text> <Text className="grid-time">9天前</Text></Paragraph>
-                            </Card.Grid>
+                            {this.getCardList(cardList)}
                         </Card>
 
                         <div style={{ height: 15, clear: 'both' }}></div>
@@ -134,7 +147,7 @@ export default class workbench extends Component {
                                 dataSource={groupData}
                                 renderItem={item => (
                                     <List.Item className="groupCardList">
-                                        <img src={item.img}/> {item.title}
+                                        <img src={require('./images/' + item.img)} /> {item.title}
                                     </List.Item>
                                 )}
                             />

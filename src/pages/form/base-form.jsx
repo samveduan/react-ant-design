@@ -25,6 +25,8 @@ export default class BaseForm extends React.Component {
         value: 0,
     };
 
+    formRef = React.createRef();
+
     onChange = e => {
         console.log('radio checked', e.target.value);
         this.setState({
@@ -40,20 +42,10 @@ export default class BaseForm extends React.Component {
         this.formRef.current.resetFields();
     };
 
-    formRef = React.createRef();
-
-    onFinish = values => {
-        console.log(values);
-    };
-
-    onReset = () => {
-        this.formRef.current.resetFields();
-    };
-
     render() {
         return (
             <>
-                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish} style={{padding: 15, background: '#FFFFFF'}}>
+                <Form {...layout} ref={this.formRef} name="control-ref" onFinish={this.onFinish} style={{ padding: 15, background: '#FFFFFF' }}>
                     <Form.Item label="账号" style={{ marginBottom: 0 }}>
                         <Form.Item
                             name="account"
@@ -208,7 +200,7 @@ export default class BaseForm extends React.Component {
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
                             提交
-                    </Button>
+                        </Button>
                     </Form.Item>
                 </Form>
             </>

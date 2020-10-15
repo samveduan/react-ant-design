@@ -48,7 +48,7 @@ class HeaderCom extends Component {
                     <Col span={10}><div className="logo"><img src={logo} />React App管理系统</div></Col>
                     <Col span={2} offset={12} style={{ textAlign: 'right' }}>
                         <Badge count={15} size='small' offset={[-15, -5]} showZero overflowCount={10} title={15}>
-                            <BellOutlined style={{ color: '#FFFFFF', cursor: 'pointer', marginRight: 30 }} />
+                            <BellOutlined style={{ color: '#1890ff', cursor: 'pointer', marginRight: 30 }} />
                         </Badge>
                         <Dropdown overlay={menu} trigger={['hover']}>
                             <a className="ant-dropdown-link" href="#" onClick={e => e.preventDefault()}>

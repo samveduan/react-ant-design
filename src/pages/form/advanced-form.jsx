@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Card } from 'antd';
-import { Form, Input, Select, Button, Radio } from 'antd';
-import { Row, Col, Divider } from 'antd';
+import { Form, Input, Select, Button } from 'antd';
+import { Row, Col } from 'antd';
 import { DatePicker } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 export default class AdvancedForm extends Component {
+    formRef = React.createRef()
+
     sendForm = () => {
         this.formRef.current.validateFields().then(values => {
             this.formRef.current.resetFields();
@@ -17,12 +18,10 @@ export default class AdvancedForm extends Component {
             })
             console.log(values);
         })
-        .catch(error => {
-            console.log(error);
-        })
+            .catch(error => {
+                console.log(error);
+            })
     }
-
-    formRef = React.createRef();
 
     render() {
         return (
@@ -30,7 +29,7 @@ export default class AdvancedForm extends Component {
                 <Card title="仓库管理" style={{ width: '100%' }}>
                     <Form
                         layout="vertical"
-                        ref={this.formRef} 
+                        ref={this.formRef}
                         name="control-ref"
                     >
                         <Row gutter={30}>
@@ -66,7 +65,7 @@ export default class AdvancedForm extends Component {
                                     name="date"
                                     rules={[{ required: true, message: '请选择生效日期!' }]}
                                 >
-                                    <RangePicker style={{width: '100%'}}/>
+                                    <RangePicker style={{ width: '100%' }} />
                                 </Form.Item>
                             </Col>
                             <Col className="gutter-row" span={8}>
@@ -80,7 +79,7 @@ export default class AdvancedForm extends Component {
                                         <Option value="lucy">周毛毛</Option>
                                     </Select>
                                 </Form.Item>
-                                <Form.Item 
+                                <Form.Item
                                     label="仓库类型"
                                     name="type"
                                     rules={[{ required: true, message: '请选择仓库类型!' }]}
@@ -99,7 +98,6 @@ export default class AdvancedForm extends Component {
                         </Row>
                     </Form>
                 </Card>
-
             </div>
         )
     }

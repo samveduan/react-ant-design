@@ -30,6 +30,7 @@ import SearchList from '../list/search-list'
 import QueryTable from '../list/query-table'
 import StandardList from '../list/standard-list'
 import CardList from '../list/card-list'
+import TreeList from '../list/tree-list'
 import baseDetail from '../detail/base-detail'
 import seniorDetail from '../detail/senior-detail'
 import SuccessCom from '../result/success'
@@ -105,6 +106,7 @@ export default class Admin extends Component {
                                 <Route path="/query-table" component={QueryTable}></Route>
                                 <Route path="/standard-list" component={StandardList}></Route>
                                 <Route path="/card-list" component={CardList}></Route>
+                                <Route path="/tree-list" component={TreeList}></Route>
                                 <Redirect to="/home" />
                             </Switch>
                         </Content>

@@ -10,3 +10,6 @@
   width: 35px;
   height: 35px;
 }
+.ant-badge-count {
+  box-shadow: 0 0 0 0 #fff;
+}

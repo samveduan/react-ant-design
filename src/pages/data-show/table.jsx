@@ -1,12 +1,13 @@
 import React from 'react'
-import { Row, Col, Table, Pagination, notification, Space, Button } from 'antd'
+import { Row, Col, Table, Pagination, notification, Space, Button, Spin } from 'antd'
 import axios from 'axios'
 
 export default class TableCom extends React.Component {
     state = {
         tableData: [],
         selectedRowKeys: [], // Check here to configure the default column
-        total: 0 // for Pagination
+        total: 0, // for Pagination,
+        tableLoading: true
     };
 
     getTableColumns = () => {
@@ -55,6 +56,10 @@ export default class TableCom extends React.Component {
 
     // 获取表格数据
     getData(pageNumber, pageSize) {
+        this.setState({
+            tableLoading: true
+        })
+
         axios.get(`/article/all/?pageSize=${pageSize}&pageNumber=${pageNumber}&sortName=id&sortOrder=desc&_=1595230808893`).then((resp) => {
             console.log("all data:");
             console.log(resp);
@@ -70,7 +75,8 @@ export default class TableCom extends React.Component {
 
             this.setState({
                 tableData: ajaxData,
-                total: resp.data.total
+                total: resp.data.total,
+                tableLoading: false
             })
 
         }, (err) => {
@@ -83,7 +89,7 @@ export default class TableCom extends React.Component {
     };
 
     componentDidMount() {
-        this.getData(1, 10);
+        this.getData(1, 5);
     }
 
     render() {
@@ -100,17 +106,21 @@ export default class TableCom extends React.Component {
             </Row>
             <Row>
                 <Col span={24}>
-                    <Table columns={this.TableColumns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
-                        onRow={record => {
-                            return {
-                                onClick: event => { console.log(record) },
-                                onDoubleClick: event => { console.log(event) }
-                            }
-                        }}
-                    >
-                    </Table>
+                    <Spin spinning={this.state.tableLoading} tip="加载中..." size="large">
+                        <Table columns={this.TableColumns} dataSource={this.state.tableData} rowSelection={rowSelection} pagination={false} bordered
+                            onRow={record => {
+                                return {
+                                    onClick: event => { console.log(record) },
+                                    onDoubleClick: event => { console.log(event) }
+                                }
+                            }}
+                        >
+                        </Table>
+                    </Spin>
                     <div style={{ height: 15 }}></div>
                     <Pagination
+                        pageSizeOptions={[5, 10, 20, 50, 100]}
+                        defaultPageSize={5}
                         total={this.state.total}
                         showSizeChanger
                         showQuickJumper
